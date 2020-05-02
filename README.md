@@ -16,6 +16,17 @@ npm test -- -u
 
 npm test -- --coverage
 
-## 发布到gh-pages
+## 计划
 
-git subtree push --prefix=docs origin gh-pages
+- [ ] modal `coding`
+- [ ] icons
+- [ ] Input
+- [ ] Radio
+- [ ] Checkbox
+- [ ] Select
+- [ ] Form
+- [ ] message
+- [ ] Notification
+- [ ] Tabs
+- [ ] List
+- [ ] ...
