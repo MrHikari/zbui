@@ -5,12 +5,14 @@ export type ButtonSize = 'lg' | 'sm'
 
 export type ButtonType = 'primary' | 'default' | 'danger' | 'link'
 
-interface BaseButtonProps  {
+interface BaseButtonProps {
   children: ReactNode
   disabled?: boolean;
   href?: string;
   size?: ButtonSize;
   type?: ButtonType;
+  icon?: React.ReactNode;
+  loading?: boolean | { delay?: number };
 }
 
 type NativeButtonProps = BaseButtonProps & Omit<ButtonHTMLAttributes<HTMLElement>, 'type'>
@@ -24,6 +26,7 @@ const Button: FC<ButtonProps> = (props) => {
     children,
     className,
     disabled,
+    loading,
     href,
     size,
     type,
@@ -32,32 +35,34 @@ const Button: FC<ButtonProps> = (props) => {
   const classes = classnames('btn', className, {
     [`btn-${type}`]: type,
     [`btn-${size}`]: size,
-    'disabled': (type === 'link') && disabled
+    'disabled': (type === 'link') && disabled,
+    'loading': !disabled && loading,
   })
   if (type === 'link' && href) {
     return (
-    <a
-      className={classes}
-      href={href}
-      {...restProps}
-    >
-      {children}
-    </a>)
+      <a
+        className={classes}
+        href={href}
+        {...restProps}
+      >
+        {children}
+      </a>)
   } else {
     return (
-    <button
-      className={classes}
-      disabled={disabled}
-      {...restProps}
-    >
-      {children}
-    </button>)
+      <button
+        className={classes}
+        disabled={disabled}
+        {...restProps}
+      >
+        {children}
+      </button>)
   }
 }
 
 Button.defaultProps = {
   type: 'default',
   disabled: false,
+  loading: false,
 }
 
 
